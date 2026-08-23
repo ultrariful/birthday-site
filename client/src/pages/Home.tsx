@@ -50,8 +50,9 @@ const media = {
 };
 
 function hostedAsset(source: string) {
-  if (typeof window !== "undefined" && window.location.hostname.endsWith("github.io")) {
-    return `${import.meta.env.BASE_URL}assets/${source.split("/").pop()}`;
+  if (typeof window !== "undefined" && window.location.hostname.endsWith("github.io") && source.startsWith("/manus-storage/")) {
+    const filename = source.split("/").pop()?.replace(/\.(jpg|png)$/, ".webp");
+    return `${import.meta.env.BASE_URL}assets/${filename}`;
   }
   return source;
 }
